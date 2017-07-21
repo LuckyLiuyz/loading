@@ -1,15 +1,15 @@
-# loading
+# loading-demo
 	This is a simple loading demo.
 	It's just one html page.
 	You can easily introduce it into your project
 
 
-## get it by git.
+## How to get it? --->By git.
 
     git clone https://github.com/Liuxiang66/loading.git
 
 
-##use 
+## How to use? 
 
 	1、show loading.
 
