@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html style="font-size: 100px;">
+<head>
+<meta charset="utf-8">
+<title>加载动态demo</title>
+<style>
+	/****************************************************************
+		loader样式
+	****************************************************************/
+	.call_loading{
+		position:fixed; 
+		background-color:rgba(0,0,0,0.7);
+		height:100%;
+		width:100%;
+		top:0;
+		bottom:0;
+		z-index:9999;
+		visibility:hidden;
+		opacity:0;
+		will-change:opacity;
+		font-size:.8rem;
+		-webkit-transition: all 0.3s;
+	    -moz-transition: all 0.3s;
+	    transition: all 0.3s;
+        display: flex;
+	    flex-direction: row;
+	    justify-content: center;
+	    align-items: center;
+	}
+	.call_loading.active{
+		visibility:visible;
+		opacity:1;
+	}
+	.call_loading_text{
+		text-align:center;color:#fff;font-size: .5rem;
+	}
+	.ball-scale-ripple-multiple-box{	 
+	  width: 4rem;
+	  height: 4rem;	 
+	}
+	/*!
+	 * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
+	 * Copyright 2015 Daniel Cardoso <@DanielCardoso>
+	 * Licensed under MIT
+	 */
+	.la-square-jelly-box,
+	.la-square-jelly-box > div {
+	    position: relative;
+	    -webkit-box-sizing: border-box;
+	       -moz-box-sizing: border-box;
+	            box-sizing: border-box;
+	    width: 1.7rem;
+	    height: 1.7rem;
+	    margin:auto;
+	    margin-bottom:.2rem;
+	}
+
+	.la-square-jelly-box {
+	    display: block;
+	    font-size: 0;
+	    color: #f4696b;
+	}
+
+	.la-square-jelly-box.la-dark {
+	    color: #333;
+	}
+
+	.la-square-jelly-box > div {
+	    display: inline-block;
+	    float: none;
+	    background-color: currentColor;
+	    border: 0 solid currentColor;
+	}
+
+	.la-square-jelly-box {
+		width: 1.7rem;
+	    height: 1.7rem;
+	}
+
+	.la-square-jelly-box > div:nth-child(1),
+	.la-square-jelly-box > div:nth-child(2) {
+	    position: absolute;
+	    left: 0;
+	    width: 100%;
+	}
+
+	.la-square-jelly-box > div:nth-child(1) {
+	    top: -25%;
+	    z-index: 1;
+	    height: 100%;
+	    border-radius: 10%;
+	    -webkit-animation: square-jelly-box-animate .6s -.1s linear infinite;
+	       -moz-animation: square-jelly-box-animate .6s -.1s linear infinite;
+	         -o-animation: square-jelly-box-animate .6s -.1s linear infinite;
+	            animation: square-jelly-box-animate .6s -.1s linear infinite;
+	}
+
+	.la-square-jelly-box > div:nth-child(2) {
+	    bottom: -22%;
+	    height: 10%;
+	    background: #000;
+	    border-radius: 50%;
+	    opacity: .4;
+	    -webkit-animation: square-jelly-box-shadow .6s -.1s linear infinite;
+	       -moz-animation: square-jelly-box-shadow .6s -.1s linear infinite;
+	         -o-animation: square-jelly-box-shadow .6s -.1s linear infinite;
+	            animation: square-jelly-box-shadow .6s -.1s linear infinite;
+	}
+
+	.la-square-jelly-box.la-sm {
+	    width: 16px;
+	    height: 16px;
+	}
+
+	.la-square-jelly-box.la-2x {
+	    width: 64px;
+	    height: 64px;
+	}
+
+	.la-square-jelly-box.la-3x {
+	    width: 96px;
+	    height: 96px;
+	}
+
+	/****************************************************************
+	 * Animations
+	 ****************************************************************/
+	@-webkit-keyframes square-jelly-box-animate {
+	    17% {
+	        border-bottom-right-radius: 10%;
+	    }
+	    25% {
+	        -webkit-transform: translateY(25%) rotate(22.5deg);
+	                transform: translateY(25%) rotate(22.5deg);
+	    }
+	    50% {
+	        border-bottom-right-radius: 100%;
+	        -webkit-transform: translateY(50%) scale(1, .9) rotate(45deg);
+	                transform: translateY(50%) scale(1, .9) rotate(45deg);
+	    }
+	    75% {
+	        -webkit-transform: translateY(25%) rotate(67.5deg);
+	                transform: translateY(25%) rotate(67.5deg);
+	    }
+	    100% {
+	        -webkit-transform: translateY(0) rotate(90deg);
+	                transform: translateY(0) rotate(90deg);
+	    }
+	}
+	@-moz-keyframes square-jelly-box-animate {
+	    17% {
+	        border-bottom-right-radius: 10%;
+	    }
+	    25% {
+	        -moz-transform: translateY(25%) rotate(22.5deg);
+	             transform: translateY(25%) rotate(22.5deg);
+	    }
+	    50% {
+	        border-bottom-right-radius: 100%;
+	        -moz-transform: translateY(50%) scale(1, .9) rotate(45deg);
+	             transform: translateY(50%) scale(1, .9) rotate(45deg);
+	    }
+	    75% {
+	        -moz-transform: translateY(25%) rotate(67.5deg);
+	             transform: translateY(25%) rotate(67.5deg);
+	    }
+	    100% {
+	        -moz-transform: translateY(0) rotate(90deg);
+	             transform: translateY(0) rotate(90deg);
+	    }
+	}
+	@-o-keyframes square-jelly-box-animate {
+	    17% {
+	        border-bottom-right-radius: 10%;
+	    }
+	    25% {
+	        -o-transform: translateY(25%) rotate(22.5deg);
+	           transform: translateY(25%) rotate(22.5deg);
+	    }
+	    50% {
+	        border-bottom-right-radius: 100%;
+	        -o-transform: translateY(50%) scale(1, .9) rotate(45deg);
+	           transform: translateY(50%) scale(1, .9) rotate(45deg);
+	    }
+	    75% {
+	        -o-transform: translateY(25%) rotate(67.5deg);
+	           transform: translateY(25%) rotate(67.5deg);
+	    }
+	    100% {
+	        -o-transform: translateY(0) rotate(90deg);
+	           transform: translateY(0) rotate(90deg);
+	    }
+	}
+	@keyframes square-jelly-box-animate {
+	    17% {
+	        border-bottom-right-radius: 10%;
+	    }
+	    25% {
+	        -webkit-transform: translateY(25%) rotate(22.5deg);
+	           -moz-transform: translateY(25%) rotate(22.5deg);
+	             -o-transform: translateY(25%) rotate(22.5deg);
+	                transform: translateY(25%) rotate(22.5deg);
+	    }
+	    50% {
+	        border-bottom-right-radius: 100%;
+	        -webkit-transform: translateY(50%) scale(1, .9) rotate(45deg);
+	           -moz-transform: translateY(50%) scale(1, .9) rotate(45deg);
+	             -o-transform: translateY(50%) scale(1, .9) rotate(45deg);
+	                transform: translateY(50%) scale(1, .9) rotate(45deg);
+	    }
+	    75% {
+	        -webkit-transform: translateY(25%) rotate(67.5deg);
+	           -moz-transform: translateY(25%) rotate(67.5deg);
+	             -o-transform: translateY(25%) rotate(67.5deg);
+	                transform: translateY(25%) rotate(67.5deg);
+	    }
+	    100% {
+	        -webkit-transform: translateY(0) rotate(90deg);
+	           -moz-transform: translateY(0) rotate(90deg);
+	             -o-transform: translateY(0) rotate(90deg);
+	                transform: translateY(0) rotate(90deg);
+	    }
+	}
+
+	@-webkit-keyframes square-jelly-box-shadow {
+	    50% {
+	        -webkit-transform: scale(1.25, 1);
+	                transform: scale(1.25, 1);
+	    }
+	}
+
+	@-moz-keyframes square-jelly-box-shadow {
+	    50% {
+	        -moz-transform: scale(1.25, 1);
+	             transform: scale(1.25, 1);
+	    }
+	}
+
+	@-o-keyframes square-jelly-box-shadow {
+	    50% {
+	        -o-transform: scale(1.25, 1);
+	           transform: scale(1.25, 1);
+	    }
+	}
+
+	@keyframes square-jelly-box-shadow {
+	    50% {
+	        -webkit-transform: scale(1.25, 1);
+	           -moz-transform: scale(1.25, 1);
+	             -o-transform: scale(1.25, 1);
+	                transform: scale(1.25, 1);
+	    }
+	}
+</style> 
+</head>
+<body>	   
+	<!-- 正在...，请等待的动画 -->
+	<div class="call_loading" id="call_loading" onclick="">
+		<div class="ball-scale-ripple-multiple-box">
+
+			<!-- la-square-jelly-box是CSS动态图画的div -->
+			<div class="la-square-jelly-box" id="la-square-jelly-box">
+				<div id="la-square-jelly-img" style=""></div>
+				<div id="la-square-jelly-img-bottom-shadow" ></div>
+			</div>
+			
+			<!-- la-square-jelly-loading-img是加载本地动态图画的div,两者只能显示其一 -->
+			<div id="la-square-jelly-loading-img" style="width: 100%;display: flex;justify-content: center;margin-bottom: .3rem;">
+				<img src="./loading_0609.gif" alt="" style="height: 1rem;"/>
+			</div>
+			
+		    <div class="call_loading_text" id="call_loading_text">
+		    	正在提交<br/>请稍候…
+		    </div>
+	    </div>
+	</div>
+</body>
+
+
+<script src="./jquery-1.11.1.min.js"></script>
+<script>
+	var Wait = {};
+	/**
+	 * 展示等待动画
+	 */
+	Wait.showAnimation = function(obj) {	
+		// 提示消息:"正在加载中，请稍后..."，
+		if (obj.message) {		
+			var newMsg = obj.message.first+"<br/>"+obj.message.second;
+			$("#call_loading_text").html(newMsg);        
+	    }	
+		// 动态图的颜色
+		if (obj.imgbg) {
+			$("#la-square-jelly-img").css({"background":obj.imgbg});        
+	    }	
+		// 是否隐藏动态图
+		if (obj.ishide) {
+			$("#la-square-jelly-loading-img").show();
+			$("#la-square-jelly-img").hide();       
+			$("#la-square-jelly-box").hide(); 
+			$("#la-square-jelly-img-bottom-shadow").hide();  	
+	    }else{
+	    	$("#la-square-jelly-loading-img").hide();
+	    	$("#la-square-jelly-img").show();   
+	    	$("#la-square-jelly-box").show();      
+			$("#la-square-jelly-img-bottom-shadow").show();      	
+	    }		
+		
+		$("#call_loading").addClass("active");
+	};
+
+	/**
+	 * 隐藏等待动画
+	 */
+	Wait.hideAnimation = function(obj) {
+		$("#call_loading").removeClass("active");
+	};
+
+	
+	Wait.showAnimation(
+		{
+			message:{
+				first:"正在加载中",
+				second:"请稍后..."
+			},
+			imgbg:"#cba162",
+			ishide:false
+		}
+	);
+
+	setTimeout(function(){
+		Wait.hideAnimation();
+		//展示第二种加载方式
+		Wait.showAnimation(
+			{
+				message:{
+					first:"正在加载中",
+					second:"请稍后..."
+				},
+				imgbg:"#cba162",
+				ishide:true
+			}
+		);
+	},3000);
+	
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
