@@ -27,4 +27,4 @@
 
 	2、hide loading.
 
-		Wait.hideAnimation();
+		Wait.hideAnimation();//隐藏动画
