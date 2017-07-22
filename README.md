@@ -16,11 +16,11 @@
 		Wait.showAnimation(
 			{
 				message:{
-					first:"正在加载中",
-					second:"请稍后..."
+					first:"正在加载中",//第一部分显示的文字
+					second:"请稍后..."//第二部分显示的文字
 				},
-				imgbg:"#cba162",
-				ishide:false
+				imgbg:"#cba162",//动画的背景色
+				ishide:false//是否隐藏默认的动画
 			}
 		);
 	
