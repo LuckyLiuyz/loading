@@ -6,7 +6,7 @@
 
 ## How to get it? --->By git.
 
-    git clone https://github.com/Liuxiang66/loading.git
+    git clone https://github.com/Happy-LYZ/loading.git
 
 
 ## How to use? 
